@@ -3,9 +3,11 @@
     this.init = function(){
       this.hiScore = 0;
       this.$hiScore = document.getElementById('hi-score');
+      this.$score = document.getElementById('score');
 
       this.reset = function(){
-        this.combo = [];
+        this.$score.innerHTML = 0;
+        this.sequence = [];
         this.index = 0;
         this.next();
       };
@@ -20,29 +22,38 @@
       };
 
       this.clickCorner = function(evt){
-        if(this.combo[this.index] === evt){
-          if(this.index >= this.combo.length - 1){
+        if(this.sequence[this.index] === evt){
+          if(this.index >= this.sequence.length - 1){
             this.next();
           } else {
             ++this.index;
           }
-          this.$hiScore.innerHTML = this.combo.length - 1;
+          this.updateScores();
         } else {
           this.fail();
         }
       };
 
-      this.showCombo = function(){
+      this.updateScores = function(){
+        var score = this.sequence.length - 1;
+        this.$score.innerHTML = score;
+        if(score > this.hiScore){
+          this.hiScore = score;
+          this.$hiScore.innerHTML = this.sequence.length - 1;
+        }
+      },
+
+      this.playSequence = function(){
         var root = this;
         var showIndex = 0;
         var interval = setInterval(function(){
-          var indexToShow = root.combo[showIndex];
+          var indexToShow = root.sequence[showIndex];
           var element = document.getElementById('corner-' + indexToShow);
           element.classList.add('highlight');
           window.setTimeout(function(){
             element.classList.remove('highlight');
           }, 400);
-          if(showIndex >= root.combo.length - 1){
+          if(showIndex >= root.sequence.length - 1){
             window.clearInterval(interval);
           }
           ++showIndex;
@@ -51,9 +62,9 @@
 
       this.next = function(){
         this.index = 0;
-        this.combo.push( Math.floor( Math.random() * 4 ) );
+        this.sequence.push( Math.floor( Math.random() * 4 ) );
 
-        this.showCombo();
+        this.playSequence();
       };
 
       this.reset();
