@@ -1,4 +1,4 @@
-(function(){
+(function(app, document, window){
   var Wizard = function(){
     this.init = function(){
       this.hiScore = 0;
@@ -46,7 +46,7 @@
       this.playSequence = function(){
         var root = this;
         var showIndex = 0;
-        var interval = setInterval(function(){
+        var interval = window.setInterval(function(){
           var indexToShow = root.sequence[showIndex];
           var element = document.getElementById('corner-' + indexToShow);
           element.classList.add('highlight');
@@ -74,5 +74,5 @@
   };
 
 
-  document.wizard = new Wizard();
-})();
+  app.wizard = new Wizard();
+})(app, document, window);

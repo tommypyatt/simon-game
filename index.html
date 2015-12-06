@@ -18,10 +18,10 @@
         <!-- Add your site or application content here -->
         <div class="wrap">
           <div class="wizard-main" id="main">
-            <a href="#" id="corner-0" class="corner corner-0" onclick="document.wizard.clickCorner(0)">red</a>
-            <a href="#" id="corner-1" class="corner corner-1" onclick="document.wizard.clickCorner(1)">blue</a>
-            <a href="#" id="corner-2" class="corner corner-2" onclick="document.wizard.clickCorner(2)">yellow</a>
-            <a href="#" id="corner-3" class="corner corner-3" onclick="document.wizard.clickCorner(3)">green</a>
+            <a href="#" id="corner-0" class="corner corner-0" onclick="app.wizard.clickCorner(0)">red</a>
+            <a href="#" id="corner-1" class="corner corner-1" onclick="app.wizard.clickCorner(1)">blue</a>
+            <a href="#" id="corner-2" class="corner corner-2" onclick="app.wizard.clickCorner(2)">yellow</a>
+            <a href="#" id="corner-3" class="corner corner-3" onclick="app.wizard.clickCorner(3)">green</a>
           </div>
           <div class="scores">
             <p>Score: <span id="score">0</span></p>
@@ -29,6 +29,9 @@
           </div>
         </div>
 
+        <script type="text/javascript">
+          var app = {};
+        </script>
         <script src="js/main.js"></script>
     </body>
 </html>
