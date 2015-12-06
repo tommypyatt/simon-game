@@ -1,9 +1,12 @@
 (function(app, document, window){
   var Wizard = function(){
     this.init = function(){
-      this.hiScore = 0;
+      this.hiScore = 0; /* One day we will get this from a cookie */
+
+      /* Cache DOM lookups. Because performance is very important, obvs */
       this.$hiScore = document.getElementById('hi-score');
       this.$score = document.getElementById('score');
+      this.$main = document.getElementById('main');
 
       this.reset = function(){
         this.$score.innerHTML = 0;
@@ -13,23 +16,32 @@
       };
 
       this.fail = function(){
-        var main = document.getElementById('main');
-        main.classList.add('fail');
+        /* Demonstrate player's failure and reset board */
+        var root = this;
+        this.$main.classList.add('fail');
         window.setTimeout(function(){
-          main.classList.remove('fail');
+          root.$main.classList.remove('fail');
         }, 500);
         this.reset();
       };
 
       this.clickCorner = function(evt){
+        if(!this.isActive){
+          /* Wait for sequence to finish playing */
+          return;
+        }
         if(this.sequence[this.index] === evt){
-          if(this.index >= this.sequence.length - 1){
-            this.next();
-          } else {
+          /* Correct! */
+          if(this.index !== this.sequence.length - 1){
+            /* There are more */
             ++this.index;
+          } else {
+            /* You got them all right */
+            this.next();
           }
           this.updateScores();
         } else {
+          /* You failed */
           this.fail();
         }
       };
@@ -45,24 +57,29 @@
 
       this.playSequence = function(){
         var root = this;
-        var showIndex = 0;
+        var index = 0;
         var interval = window.setInterval(function(){
-          var indexToShow = root.sequence[showIndex];
-          var element = document.getElementById('corner-' + indexToShow);
+          /* Start sequence loop */
+          var corner = root.sequence[index];
+          var element = document.getElementById('corner-' + corner);
           element.classList.add('highlight');
           window.setTimeout(function(){
             element.classList.remove('highlight');
           }, 400);
-          if(showIndex >= root.sequence.length - 1){
+          if(index >= root.sequence.length - 1){
+            /* Exit loop */
             window.clearInterval(interval);
+            root.isActive = true;
           }
-          ++showIndex;
+          ++index;
         }, 500);
       };
 
       this.next = function(){
+        /* Add one more to sequence and play it */
         this.index = 0;
         this.sequence.push( Math.floor( Math.random() * 4 ) );
+        this.isActive = false;
 
         this.playSequence();
       };
