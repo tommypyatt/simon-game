@@ -13,7 +13,7 @@
     <body>
         <div id="simon"></div>
         <script type="text/javascript">
-          var app = {};
+          var Simon = {};
         </script>
         <script src="js/react.js"></script>
         <script src="js/react-dom.min.js"></script>
