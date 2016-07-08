@@ -17,7 +17,6 @@
         </script>
         <script src="js/react.js"></script>
         <script src="js/react-dom.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-        <script type="text/babel" src="js/main.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>
