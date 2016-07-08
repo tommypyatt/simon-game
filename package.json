@@ -1,0 +1,23 @@
+{
+    "name": "tommypyatt-simon-game",
+    "version": "0.0.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tommypyatt/simon-game"
+    },
+        "license": "GPL-3.0",
+        "bugs": {
+        "url": "https://github.com/tommypyatt/simon-game/issues"
+    },
+    "homepage": "http://tommypyatt.github.io/simon-game",
+    "description": "Basic clone of 'Simon' memory game in JavaScript.",
+    "dependencies": {
+        "gulp": "~3.9.1",
+        "gulp-babel": "~6.1.2",
+        "babel-cli": "~6.10.1",
+        "babel-preset-react": "~6.11.1",
+        "react": "~15.2.0",
+        "react-dom": "~15.2.0",
+        "gulp-watch": "4.3.8"
+    }
+}
