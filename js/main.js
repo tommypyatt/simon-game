@@ -6,12 +6,12 @@
         getInitialState: function () {
             return {
                 hiScore: 0,
-                score: 0,
-                firstActive: false
+                score: 0
             };
         },
 
         playSequence: function (sequenceArray) {
+            Simon.Game.paused = true;
             var root = this;
             var index = 0;
             var interval = window.setInterval(function () {
@@ -24,7 +24,7 @@
                 if (index >= sequenceArray.length - 1) {
                     /* Exit loop */
                     window.clearInterval(interval);
-                    root.isActive = true;
+                    Simon.Game.paused = false;
                 }
                 ++index;
             }, 500);
@@ -68,13 +68,12 @@
                 )
             );
         }
-
     });
 
     Simon.Corner = React.createClass({
         displayName: "Corner",
 
-        render: function (active) {
+        render: function () {
             var className = "corner corner-" + this.props.number;
             className += this.props.active === true ? ' highlight' : '';
             return React.createElement(
@@ -87,16 +86,16 @@
         },
 
         clickCorner: function (corner) {
+            if (Simon.Game.paused) {
+                return;
+            }
             Simon.Game.clickCorner(corner);
-        },
-
-        componentDidUpdate: function () {
-            this.render();
         }
     });
 
     Simon.Game = {
         initialize: function () {
+            this.hiScore = 0;
             this.reset();
         },
 
@@ -104,6 +103,15 @@
             this.sequence = [];
             this.index = 0;
             this.next();
+        },
+
+        next: function () {
+            /* Add one more to sequence and play it */
+            this.index = 0;
+            this.sequence.push(Math.floor(Math.random() * 4));
+            this.isActive = false;
+
+            Simon.view.playSequence(this.sequence);
         },
 
         fail: function () {
@@ -140,15 +148,6 @@
                 this.hiScore = score;
                 Simon.view.setState({ hiScore: this.hiScore });
             }
-        },
-
-        next: function () {
-            /* Add one more to sequence and play it */
-            this.index = 0;
-            this.sequence.push(Math.floor(Math.random() * 4));
-            this.isActive = false;
-
-            Simon.view.playSequence(this.sequence);
         }
     };
 
