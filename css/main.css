@@ -281,19 +281,20 @@ textarea {
 
 .simon-container {
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 16% 0 20px;
     background: #e8e8e8;
     max-width: 600px;
 }
 
 .wizard-main{
-    width: 80%;
-    padding-bottom: 80%;
+    width: 65%;
+    padding-bottom: 65%;
     margin: 0 auto;
     position: relative;
     border-radius: 5%;
     overflow: hidden;
     box-shadow: #676767 2px 5px 6px;
+    transform: rotate(45deg);
 }
 .corner{
     position: absolute;
@@ -338,6 +339,7 @@ textarea {
 
 .scores {
     text-align: center;
+    padding: 15% 0 0;
 }
 
 .high-score{
