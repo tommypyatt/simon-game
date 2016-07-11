@@ -11,27 +11,12 @@
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-        <div class="wrap">
-          <div class="wizard-main" id="main">
-            <a href="#" id="corner-0" class="corner corner-0" onclick="app.wizard.clickCorner(0)">red</a>
-            <a href="#" id="corner-1" class="corner corner-1" onclick="app.wizard.clickCorner(1)">blue</a>
-            <a href="#" id="corner-2" class="corner corner-2" onclick="app.wizard.clickCorner(2)">yellow</a>
-            <a href="#" id="corner-3" class="corner corner-3" onclick="app.wizard.clickCorner(3)">green</a>
-          </div>
-          <div class="scores">
-            <p>Score: <span id="score">0</span></p>
-            <p>Hi-score: <span id="hi-score">0</span></p>
-          </div>
-        </div>
-
+        <div id="simon" class="simon-container"></div>
         <script type="text/javascript">
-          var app = {};
+          var Simon = {};
         </script>
-        <script src="js/main.js"></script>
+        <script src="js/react.js"></script>
+        <script src="js/react-dom.min.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
     </body>
 </html>
