@@ -15,9 +15,9 @@
             var interval = window.setInterval(function(){
                 /* Start sequence loop */
                 var corner = sequenceArray[index];
-                root.setState({activeCorner: corner});
+                root.setState({highlightedCorner: corner});
                 window.setTimeout(function(){
-                    root.setState({activeCorner: null});
+                    root.setState({highlightedCorner: null});
                 }, 400);
                 if(index >= sequenceArray.length - 1){
                     /* Exit loop */
@@ -29,12 +29,12 @@
         },
 
         render: function () {
-            return <div className="wrap">
+            return <div className={(this.state.fail !== true) ? 'wrap' : 'wrap fail'}>
                 <div className="wizard-main" id="main">
-                    <Simon.Corner colour="red"    number="0" active={(this.state.activeCorner === 0)} />
-                    <Simon.Corner colour="blue"   number="1" active={(this.state.activeCorner === 1)} />
-                    <Simon.Corner colour="yellow" number="2" active={(this.state.activeCorner === 2)} />
-                    <Simon.Corner colour="green"  number="3" active={(this.state.activeCorner === 3)} />
+                    <Simon.Corner colour="red"    number="0" highlighted={(this.state.highlightedCorner === 0)} />
+                    <Simon.Corner colour="blue"   number="1" highlighted={(this.state.highlightedCorner === 1)} />
+                    <Simon.Corner colour="yellow" number="2" highlighted={(this.state.highlightedCorner === 2)} />
+                    <Simon.Corner colour="green"  number="3" highlighted={(this.state.highlightedCorner === 3)} />
                 </div>
                 <div className="scores">
                     <p>Score: <span id="score">{this.state.score}</span></p>
@@ -47,7 +47,7 @@
     Simon.Corner = React.createClass({
         render: function () {
             var className = "corner corner-" + this.props.number;
-            className += (this.props.active === true) ? ' highlight' : '';
+            className += (this.props.highlighted === true) ? ' highlight' : '';
             return <a href="javascript:void(0)"
                 className={className}
                 onClick={this.clickCorner.bind(this, this.props.number)}>{this.props.colour}</a>
@@ -85,10 +85,15 @@
         fail: function(){
             /* Demonstrate player's failure and reset board */
             var root = this;
-            //this.$main.classList.add('fail');
+            Simon.view.setState({
+                score: 0,
+                fail: true
+            });
             window.setTimeout(function(){
-                //root.$main.classList.remove('fail');
-            }, 500);
+                Simon.view.setState({
+                    fail: false
+                });
+            }, 800);
             this.reset();
         },
 
