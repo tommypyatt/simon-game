@@ -279,14 +279,27 @@ textarea {
     }
 }
 
+.simon-container {
+    margin: 0 auto;
+    padding: 20px 0;
+    background: #e8e8e8;
+    max-width: 600px;
+}
+
 .wizard-main{
-    width: 100%;
+    width: 80%;
+    padding-bottom: 80%;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 5%;
+    overflow: hidden;
+    box-shadow: #676767 2px 5px 6px;
 }
 .corner{
-    display: block;
-    float: left;
+    position: absolute;
+    height: 50%;
+    width: 50%;
     text-indent: -9999em;
-    height: 200px;
     width: 50%;
 }
 
@@ -296,23 +309,35 @@ textarea {
 
 .corner.highlight,
 .corner:active{
-    background: #fcc;
+    background: #fff;
 }
 
 .corner-0{
-    background: red;
+    background: rgb(224, 24, 24);
+    top: 0;
+    left: 0;
 }
 
 .corner-1{
-    background: blue;
+    background: rgb(17, 17, 253);
+    top: 0;
+    left: 50%;
 }
 
 .corner-2{
-    background: yellow;
+    background: rgb(239, 239, 16);
+    top: 50%;
+    left: 0;
 }
 
 .corner-3{
-    background: green;
+    background: rgb(22, 117, 22);
+    top: 50%;
+    left: 50%;
+}
+
+.scores {
+    text-align: center;
 }
 
 .high-score{
