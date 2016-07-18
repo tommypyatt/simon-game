@@ -9,6 +9,8 @@
         },
 
         playSequence: function(sequenceArray){
+            /*  Maybe this logic belongs in the App, but I decided to make the
+                View responsible for 'playing' the sequence to the player. */
             Simon.Game.paused = true;
             var root = this;
             var index = 0;
@@ -29,6 +31,7 @@
         },
 
         render: function () {
+            /*  This is the main component, which is where state will be stored. */
             return <div className={(this.state.fail !== true) ? 'wrap' : 'wrap fail'}>
                 <div className="wizard-main" id="main">
                     <Simon.Corner colour="red"    number="0" highlighted={(this.state.highlightedCorner === 0)} />
@@ -45,6 +48,8 @@
     });
 
     Simon.Corner = React.createClass({
+        /*  Standalone component for the corners. Add class 'highlight' when the
+            corner is highlighted. */
         render: function () {
             var className = "corner corner-" + this.props.number;
             className += (this.props.highlighted === true) ? ' highlight' : '';
@@ -62,6 +67,8 @@
     });
 
     Simon.Game = {
+        /*  Game logic will take place here, and rendering logic will be
+            offloaded into the View component. */
         initialize: function(){
             this.hiScore = 0;
             this.reset();
@@ -83,7 +90,7 @@
         },
 
         fail: function(){
-            /* Demonstrate player's failure and reset board */
+            /*   Demonstrate player's failure and reset board */
             var root = this;
             Simon.view.setState({
                 score: 0,
@@ -98,6 +105,7 @@
         },
 
         clickCorner: function(evt){
+            /*   Handle this logic outside of view */
             if(this.sequence[this.index] == evt){
               /* Correct! */
               if (this.index !== this.sequence.length - 1) {
@@ -115,6 +123,8 @@
         },
 
         updateScores: function(){
+            /*  Set score as state on view. If score is the highest it has been,
+                set high score too */
             var score = this.sequence.length - 1;
             Simon.view.setState({ score: score });
             if(score > this.hiScore){
@@ -125,6 +135,7 @@
     };
 
     Simon.view = ReactDOM.render(
+        /*  Create game component and render it in a HTML container. */
         <Simon.View />,
         document.getElementById('simon')
     );
